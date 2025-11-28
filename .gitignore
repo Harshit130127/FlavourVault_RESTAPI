@@ -1,0 +1,20 @@
+# ============================
+# Python
+# ============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.so
+.env
+venv/
+env/
+.venv/
+.pytest_cache/
+
+
+
+./app/db.sqlite3
