@@ -17,4 +17,8 @@ env/
 
 
 
+# Django SQLite databases
+db.sqlite3
 app/db.sqlite3
+**/*.sqlite3
+
