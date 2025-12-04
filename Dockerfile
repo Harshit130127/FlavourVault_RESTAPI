@@ -1,4 +1,4 @@
-FROM python:3.11-alpine3.22
+FROM python:3.11-alpine3.22 
 LABEL maintainer="FlavourVault_Dev_Team"
 
 
