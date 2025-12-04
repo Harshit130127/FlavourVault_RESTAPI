@@ -7,7 +7,7 @@ from unittest.mock import patch  # patch used for mocking objects in tests
 from psycopg2 import OperationalError as Psycopg2Error  # Importing PostgreSQL OperationalError for simulation
 
 from django.core.management import call_command   
-
+import time
 from django.db.utils import OperationalError
 from django.test import SimpleTestCase
 
@@ -26,8 +26,8 @@ class CommandTests(SimpleTestCase):
         
         patched_check.assert_called_once_with(databases=['default'])  # Assert the check method was called once  
     
-    
-    def test_wait_for_db_delay(self,patched_check):
+    @patch('time.sleep', return_value=None)  # Mock time.sleep to avoid delays in tests
+    def test_wait_for_db_delay(self,patched_sleep,patched_check):
         """ Test waiting for database when getting OperationalError. """
         
         patched_check.side_effect = [Psycopg2Error]*2 + [OperationalError]*3 + [True]  # Simulate delays in database readiness
@@ -35,3 +35,4 @@ class CommandTests(SimpleTestCase):
         call_command('wait_for_db')  # Call the custom command
         
         self.assertEqual(patched_check.call_count,6)  # Assert the check method was called six times
+        patched_check.assert_called_with(databases=['default'])  # Assert the check method was called with the correct database
