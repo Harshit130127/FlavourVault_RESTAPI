@@ -32,6 +32,6 @@ services:
       - POSTGRES_DB=Flavourvaultdb
       - POSTGRES_USER=devuser
       - POSTGRES_PASSWORD=devpassword
-    
+
 volumes:
   dev-db-data:
